@@ -18,13 +18,18 @@ public class Pawn : MonoBehaviour
     [SerializeField] private float heroesSpeed;
     [SerializeField] private float maxForce = 10f; 
     [SerializeField] private PawnType heroesPawnType;
+    public PawnType getPawnType()
+    {
+        return this.heroesPawnType;
+    }
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         if (heroesPawnType == PawnType.Penetrate){
-            gameObject.layer = LayerMask.NameToLayer("Penetrate");
+            rb.excludeLayers = LayerMask.GetMask("Ally" ,"Ennemy"); 
+
         } 
     }
 

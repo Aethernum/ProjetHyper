@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100020, guid: c685db5bd3a0f9b4d8ddb667b78d772f, type: 3}
       propertyPath: m_Name
-      value: Gladiator Low Poly Arena
+      value: Arena
       objectReference: {fileID: 0}
     - target: {fileID: 100020, guid: c685db5bd3a0f9b4d8ddb667b78d772f, type: 3}
       propertyPath: m_IsActive
@@ -123,9 +123,41 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 104246855907544801, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 224359220543585393, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 250139377254533435, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 950895411997167417, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178766557203359076, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 1657880355316474338, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
       propertyPath: m_Name
       value: InvisbleWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2533005641179386360, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3016751107834304311, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138713043274433290, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3674958557552158997, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -170,6 +202,22 @@ PrefabInstance:
     - target: {fileID: 4499767980390701098, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899812901379091443, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5295070154164325727, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7152245402272045670, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721476225837536740, guid: c8a8aa1be9f6fb8429aeac23a8718b13, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
