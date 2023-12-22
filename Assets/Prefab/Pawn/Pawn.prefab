@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroesName: 
   heroesSpeed: 5
+  maxForce: 25
   heroesPawnType: 0
 --- !u!114 &-509792177022355282
 MonoBehaviour:
@@ -189,7 +190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8305270951861448936}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9597a8ff1080b0a44816994ca44ff01a, type: 3}
   m_Name: 

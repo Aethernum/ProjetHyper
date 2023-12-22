@@ -15,7 +15,7 @@ public class Pawn : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private string heroesName;
     [SerializeField] private float heroesSpeed;
-
+    [SerializeField] private float maxForce = 10f; 
     [SerializeField] private PawnType heroesPawnType;
 
     // Start is called before the first frame update
@@ -64,9 +64,15 @@ public class Pawn : MonoBehaviour
 
         // Calculer la direction et la distance entre le clic initial et la position actuelle de la souris
         Vector3 dragDirection = currentMousePosition - clickPosition;
-
+        Vector3 forceToApply = -dragDirection * heroesSpeed;
+        // Vérifier si la magnitude de la force à appliquer dépasse la force maximale
+        if (forceToApply.magnitude > maxForce)
+        {
+            // Réduire la magnitude à la force maximale autorisée
+            forceToApply = forceToApply.normalized * maxForce;
+        }
         // Appliquer une force proportionnelle à la distance pour simuler la projection
-        rb.AddForce(-dragDirection * heroesSpeed, ForceMode.Impulse);
+        rb.AddForce(forceToApply, ForceMode.Impulse);
         isMouseDragging = false;
     }
 
