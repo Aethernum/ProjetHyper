@@ -37,7 +37,7 @@ public class Rebound : MonoBehaviour
 
             rb.velocity = direction * Mathf.Max(speed, 0f);
         }
-        /*else if(col.gameObject.tag == "Ennemy")
+        else if(col.gameObject.tag == "Ennemy")
         {
             switch(this.pawnType)
             {
@@ -56,7 +56,7 @@ public class Rebound : MonoBehaviour
                 default:
                 break;
             }
-        }*/
+        }
        
     }
 }

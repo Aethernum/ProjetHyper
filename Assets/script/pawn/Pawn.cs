@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum PawnType
@@ -22,11 +23,13 @@ public class Pawn : MonoBehaviour
     {
         return this.heroesPawnType;
     }
-
+    private SpeedSensor sensor;
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        sensor = GetComponent<SpeedSensor>();
+        sensor.OnSpeedReached += OnSpeedLimitReached; 
         if (heroesPawnType == PawnType.Penetrate){
             rb.excludeLayers = LayerMask.GetMask("Ally" ,"Ennemy"); 
 
@@ -48,17 +51,23 @@ public class Pawn : MonoBehaviour
                 OnMouseUp();
             }
         }
-       
+        if (isSelected || rb.velocity.magnitude > 0.1f){
+            rb.constraints =  RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+        else{
+            
+            rb.constraints = RigidbodyConstraints.FreezeAll ;
+        }
     }
-
+    void OnSpeedLimitReached(float speed) {
+        isSelected=false;
+    }
     private void TryStartDrag()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        Debug.Log("try");
         if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
         {
-            isMouseDragging = true;
             // Le clic de la souris a commencé sur le pawn
             OnMouseDown();
             
@@ -86,17 +95,24 @@ public class Pawn : MonoBehaviour
         rb.AddForce(forceToApply, ForceMode.Impulse);
         
         isMouseDragging = false;
-        isSelected = false;
+        
+        
         
     }
 
     private void OnMouseDown()
     {
         isSelected = true;
+        
+        Debug.Log("slected");
         clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
         // Convertir la position du clic en position dans l'espace du monde
         clickPosition = Camera.main.ScreenToWorldPoint(clickPosition);
     }
+
+
+
+
 }
