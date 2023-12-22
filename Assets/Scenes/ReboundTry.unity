@@ -497,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8305270951861448936, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
       propertyPath: m_Name
-      value: Ennemy
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8305270951861448936, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
       propertyPath: m_TagString
