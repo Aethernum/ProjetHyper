@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Rebound : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 lastVelocity;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();   
-        rb.AddForce(200,0,300);
+        rb = GetComponent<Rigidbody>();
+        //rb.AddForce(200,0,300);
     }
 
     // Update is called once per frame
-     void Update()
+    private void Update()
     {
         lastVelocity = rb.velocity;
     }
 
-    void OnCollisionEnter(Collision col)
+    private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.name.Contains("Wall") || col.gameObject.name.Contains("Cylinder"))
         {
@@ -37,5 +36,4 @@ public class Rebound : MonoBehaviour
             rb.velocity = direction * Mathf.Max(speed, 0f);
         }
     }
-
 }

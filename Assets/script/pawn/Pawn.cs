@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum PawnType
-    {
-        Bounce,
-        Penetrate,
-        Stick
-        // Ajoutez d'autres types selon vos besoins
-    }
+{
+    Bounce,
+    Penetrate,
+    Stick
+    // Ajoutez d'autres types selon vos besoins
+}
+
 public class Pawn : MonoBehaviour
 {
     private bool isMouseDragging = false;
@@ -17,32 +15,33 @@ public class Pawn : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private string heroesName;
     [SerializeField] private float heroesSpeed;
-    
+
     [SerializeField] private PawnType heroesPawnType;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             TryStartDrag();
-            
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if(isMouseDragging){
+            if (isMouseDragging)
+            {
                 OnMouseUp();
             }
-            
         }
     }
-    void TryStartDrag()
+
+    private void TryStartDrag()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -54,9 +53,10 @@ public class Pawn : MonoBehaviour
             isMouseDragging = true;
         }
     }
+
     private void OnMouseUp()
     {
-         Vector3 currentMousePosition = Input.mousePosition;
+        Vector3 currentMousePosition = Input.mousePosition;
         currentMousePosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
         // Convertir la position actuelle de la souris en position dans l'espace du monde
@@ -70,10 +70,9 @@ public class Pawn : MonoBehaviour
         isMouseDragging = false;
     }
 
-    
     private void OnMouseDown()
     {
-       clickPosition = Input.mousePosition;
+        clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
         // Convertir la position du clic en position dans l'espace du monde
