@@ -18,6 +18,11 @@ public class Pawn : MonoBehaviour
 
     [SerializeField] private PawnType heroesPawnType;
 
+    public PawnType getPawnType()
+    {
+        return this.heroesPawnType;
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -78,4 +83,5 @@ public class Pawn : MonoBehaviour
         // Convertir la position du clic en position dans l'espace du monde
         clickPosition = Camera.main.ScreenToWorldPoint(clickPosition);
     }
+
 }
