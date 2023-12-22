@@ -11,6 +11,7 @@ public enum PawnType
 public class Pawn : MonoBehaviour
 {
     private bool isMouseDragging = false;
+    private bool isSelected;
     private Vector3 clickPosition;
     private Rigidbody rb;
     [SerializeField] private string heroesName;
@@ -22,10 +23,13 @@ public class Pawn : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (heroesPawnType == PawnType.Penetrate){
+            gameObject.layer = LayerMask.NameToLayer("Penetrate");
+        } 
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -39,18 +43,20 @@ public class Pawn : MonoBehaviour
                 OnMouseUp();
             }
         }
+       
     }
 
     private void TryStartDrag()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
+        Debug.Log("try");
         if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
         {
+            isMouseDragging = true;
             // Le clic de la souris a commencé sur le pawn
             OnMouseDown();
-            isMouseDragging = true;
+            
         }
     }
 
@@ -73,11 +79,15 @@ public class Pawn : MonoBehaviour
         }
         // Appliquer une force proportionnelle à la distance pour simuler la projection
         rb.AddForce(forceToApply, ForceMode.Impulse);
+        
         isMouseDragging = false;
+        isSelected = false;
+        
     }
 
     private void OnMouseDown()
     {
+        isSelected = true;
         clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
