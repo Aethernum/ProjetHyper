@@ -20,8 +20,20 @@ public class Sticky : Character
         {
             Vector3 velocity = rb.velocity;
             rb.velocity = Vector3.zero;
-            rb.velocity = -col.contacts[0].normal * velocity.magnitude * 0.1f;
-            Debug.Log("Collision Enfant : Ennemy");
+
+            Collider opponentCollider = col.collider;
+            Collider thisCollider = GetComponent<Collider>();
+            if (opponentCollider != null && thisCollider != null)
+            {
+                // Trouve le point de contact entre les deux colliders
+                ContactPoint contact = col.contacts[0]; // Obtient le premier point de contact de la collision
+                Vector3 pointDeContact = contact.point;
+
+                // Place l'objet A à la limite du collider de l'objet B
+                transform.position = pointDeContact;
+            }
+            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+            opponentCharacter.TakeDamage(attack);
         }
     }
 }

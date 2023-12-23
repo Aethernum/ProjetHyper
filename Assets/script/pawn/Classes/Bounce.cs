@@ -24,7 +24,8 @@ public class Bounce : Character
             var speed = lastVelocity.magnitude;
             var direction = Vector3.Reflect(lastVelocity.normalized, col.contacts[0].normal);
             rb.velocity = direction * Mathf.Max(speed, 0f);
-            Debug.Log("Collision Enfant : Ennemy");
+            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+            opponentCharacter.TakeDamage(attack);
         }
        
     }

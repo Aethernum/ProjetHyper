@@ -29,10 +29,8 @@ public class Penetrate : Character
             if (!enemiesInContact.Contains(col.gameObject))
             {
                 enemiesInContact.Add(col.gameObject);
-                Debug.Log("Contact avec : " + col.gameObject.name);
-                Stats opponentScript = col.gameObject.GetComponentInParent<Stats>();
-                opponentScript.TakeDamage(attack);
-                Debug.Log("Collision Enfant : Ennemy");
+                Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+                opponentCharacter.TakeDamage(attack);
             }
         }
     }
