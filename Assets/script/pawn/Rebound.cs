@@ -47,11 +47,15 @@ public class Rebound : MonoBehaviour
                     rb.velocity = direction * Mathf.Max(speed, 0f);
                 break;
                 case PawnType.Penetrate:
+                    
                     Debug.Log("Penetrate");
                 break;
                 case PawnType.Stick:
                     Debug.Log("Stick!");
-                     rb.velocity = Vector3.zero;
+                    // Sauvegarder vitesse actuelle  
+                    Vector3 velocity = rb.velocity;
+                    rb.velocity = Vector3.zero;
+                    rb.velocity = -col.contacts[0].normal * velocity.magnitude * 0.1f;
                 break;
                 default:
                 break;
