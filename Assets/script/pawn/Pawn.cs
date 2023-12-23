@@ -24,6 +24,10 @@ public class Pawn : MonoBehaviour
         return this.heroesPawnType;
     }
     private SpeedSensor sensor;
+    private IEnumerator speedCheckCoroutine;
+
+
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -51,20 +55,24 @@ public class Pawn : MonoBehaviour
                 OnMouseUp();
             }
         }
-        if (isSelected || rb.velocity.magnitude > 0.1f){
-            rb.constraints =  RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        }
-        else{
-            
-            rb.constraints = RigidbodyConstraints.FreezeAll ;
-        }
+    }
+    private IEnumerator SpeedCheckCoroutine(){
+        while(true){
+
+            if (isSelected || rb.velocity.magnitude > 0.1f){
+                rb.constraints =  RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+            }
+            else{    
+                rb.constraints = RigidbodyConstraints.FreezeAll ;
+            }
+            yield return new WaitForFixedUpdate();
+        }   
     }
     void OnSpeedLimitReached(float speed) {
         isSelected=false;
     }
     private void TryStartDrag()
     {
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
@@ -116,7 +124,16 @@ public class Pawn : MonoBehaviour
         clickPosition = Camera.main.ScreenToWorldPoint(clickPosition);
     }
 
-
-
+    private void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.CompareTag("Ground")) {
+            speedCheckCoroutine = SpeedCheckCoroutine();
+            StartCoroutine(speedCheckCoroutine);
+        }
+    }
+    private void OnCollisionExit(Collision collision){
+        if(collision.gameObject.CompareTag("Ground")) {
+            StopCoroutine(speedCheckCoroutine);
+        }
+    }
 
 }
