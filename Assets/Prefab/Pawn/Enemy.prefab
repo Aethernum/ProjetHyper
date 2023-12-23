@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3471329453933412492, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
+      propertyPath: m_TagString
+      value: Ennemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3680963282245556705, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -87,5 +91,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8305270951861448936, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9099244090218551576}
   m_SourcePrefab: {fileID: 100100000, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
+--- !u!1 &3790191274290927986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8305270951861448936, guid: 2a8d39388199a1d4ca122a3c65267194, type: 3}
+  m_PrefabInstance: {fileID: 5177812514762074522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9099244090218551576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3790191274290927986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5313b5a83bce2a3478d9afeccd044f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 50
+  currentHp: 50
+  heroesSpeed: 5
+  attack: 10
+  defense: 5

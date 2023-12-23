@@ -23,10 +23,8 @@ public class Rebound : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        Debug.Log("Collision!");
         foreach (ContactPoint contact in col.contacts)
         {
-            Debug.Log("Autre collider : " + contact.otherCollider);
             // Vous pouvez ajouter d'autres informations que vous voulez afficher ici
         }
 
