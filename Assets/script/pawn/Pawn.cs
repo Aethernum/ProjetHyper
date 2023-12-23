@@ -64,10 +64,12 @@ public class Pawn : MonoBehaviour
     }
     private void TryStartDrag()
     {
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
         {
+            
             // Le clic de la souris a commencé sur le pawn
             OnMouseDown();
             
@@ -102,9 +104,11 @@ public class Pawn : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if( gameObject.tag == "Ennemy"){
+            return;
+        }
         isSelected = true;
         
-        Debug.Log("slected");
         clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
