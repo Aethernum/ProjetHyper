@@ -78,21 +78,34 @@ public class Movement : MonoBehaviour
         // Convertir la position actuelle de la souris en position dans l'espace du monde
         currentMousePosition = Camera.main.ScreenToWorldPoint(currentMousePosition);
 
-        // Calculer la direction et la distance entre le clic initial et la position actuelle de la souris
+        // Calcul de la direction et distance du drag
         Vector3 dragDirection = currentMousePosition - clickPosition;
-        Vector3 forceToApply = -dragDirection * character.GetSpeed();
-        // Vérifier si la magnitude de la force à appliquer dépasse la force maximale
+        float dragDistance = dragDirection.magnitude;
+        // Distance limite
+        float limitDistance = 7f;
+
+        // Si distance > limite, force = vitesse max
+        // Sinon force = % de la vitesse
+        float forceMultiplier;
+        if (dragDistance > limitDistance)
+        {
+            forceMultiplier = 1f;
+        }
+        else
+        {
+            forceMultiplier = dragDistance / limitDistance;
+        }
+        Vector3 forceToApply = -dragDirection.normalized * character.GetSpeed() * forceMultiplier;
 
         // Appliquer une force proportionnelle à la distance pour simuler la projection
         rb.AddForce(forceToApply, ForceMode.Impulse);
 
         isMouseDragging = false;
-        Debug.Log("unclicked");
     }
 
     private void OnMouseDown()
     {
-        if (gameObject.tag == "Ennemy")
+        if (gameObject.tag == "Team2")
         {
             return;
         }
@@ -103,7 +116,6 @@ public class Movement : MonoBehaviour
 
         // Convertir la position du clic en position dans l'espace du monde
         clickPosition = Camera.main.ScreenToWorldPoint(clickPosition);
-        Debug.Log("clicked");
     }
 
     private void OnCollisionEnter(Collision collision)

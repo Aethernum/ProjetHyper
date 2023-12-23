@@ -15,9 +15,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Ally
-  - Ennemy
-  - Penetrate
+  - Team1
+  - Team2
+  - IgnoreCollide
   - 
   - 
   - 
