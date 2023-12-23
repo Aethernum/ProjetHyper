@@ -1,33 +1,24 @@
 using System.Collections;
 using UnityEngine;
 
-/* public enum PawnType
-{
-    Bounce,
-    Penetrate,
-    Stick
-    // Ajoutez d'autres types selon vos besoins
-} */
-
-public class Pawn : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     private bool isMouseDragging = false;
     private bool isSelected;
     private Vector3 clickPosition;
     private Rigidbody rb;
-    [SerializeField] private float heroesSpeed;
-    [SerializeField] private float maxForce = 50f;
 
     private SpeedSensor sensor;
     private IEnumerator speedCheckCoroutine;
+    private Character character;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        character = GetComponent<Character>();
         sensor = GetComponent<SpeedSensor>();
         sensor.OnSpeedReached += OnSpeedLimitReached;
-        Debug.Log("start Pawn");
     }
 
     // Update is called once per frame
@@ -53,7 +44,7 @@ public class Pawn : MonoBehaviour
         {
             if (isSelected || rb.velocity.magnitude > 0.1f)
             {
-                rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+                rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             }
             else
             {
@@ -74,7 +65,7 @@ public class Pawn : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
         {
-            // Le clic de la souris a commencÃ© sur le pawn
+            // Le clic de la souris a commencé sur le pawn
             OnMouseDown();
         }
     }
@@ -89,14 +80,10 @@ public class Pawn : MonoBehaviour
 
         // Calculer la direction et la distance entre le clic initial et la position actuelle de la souris
         Vector3 dragDirection = currentMousePosition - clickPosition;
-        Vector3 forceToApply = -dragDirection * heroesSpeed;
-        // VÃ©rifier si la magnitude de la force Ã  appliquer dÃ©passe la force maximale
-        if (forceToApply.magnitude > maxForce)
-        {
-            // RÃ©duire la magnitude Ã  la force maximale autorisÃ©e
-            forceToApply = forceToApply.normalized * maxForce;
-        }
-        // Appliquer une force proportionnelle Ã  la distance pour simuler la projection
+        Vector3 forceToApply = -dragDirection * character.GetSpeed();
+        // Vérifier si la magnitude de la force à appliquer dépasse la force maximale
+
+        // Appliquer une force proportionnelle à la distance pour simuler la projection
         rb.AddForce(forceToApply, ForceMode.Impulse);
 
         isMouseDragging = false;

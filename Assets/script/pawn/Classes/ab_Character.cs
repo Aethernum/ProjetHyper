@@ -1,36 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public enum PawnType
-{
-    Bounce,
-    Penetrate,
-    Stick
-    // Ajoutez d'autres types selon vos besoins
-}
-
-abstract public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     [SerializeField] protected string heroesName;
     [SerializeField] protected int maxHp = 50;
     [SerializeField] protected int currentHp = 50;
     [SerializeField] protected float speed = 5;
+
     [SerializeField] protected int attack = 10;
     [SerializeField] protected int defense = 5;
-    [SerializeField] protected PawnType type;
     protected Rigidbody rb;
     protected Vector3 lastVelocity;
 
+    // Accesseur
+    public float GetSpeed()
+    {
+        return this.speed;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         lastVelocity = rb.velocity;
     }
@@ -50,6 +45,5 @@ abstract public class Character : MonoBehaviour
             rb.velocity = direction * Mathf.Max(speed, 0f);
             Debug.Log("Collision Parent : Wall");
         }
-       
     }
 }

@@ -5,14 +5,12 @@ public class Rebound : MonoBehaviour
     private Pawn pawn;
     private Rigidbody rb;
     private Vector3 lastVelocity;
-    private PawnType pawnType;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         pawn = GetComponent<Pawn>();
-        pawnType = pawn.getPawnType();
     }
 
     // Update is called once per frame
@@ -35,30 +33,5 @@ public class Rebound : MonoBehaviour
 
             rb.velocity = direction * Mathf.Max(speed, 0f);
         }
-        else if(col.gameObject.tag == "Ennemy")
-        {
-            switch(this.pawnType)
-            {
-                case PawnType.Bounce:
-                    var speed = lastVelocity.magnitude;
-                    var direction = Vector3.Reflect(lastVelocity.normalized, col.contacts[0].normal);
-                    rb.velocity = direction * Mathf.Max(speed, 0f);
-                break;
-                case PawnType.Penetrate:
-                    
-                    Debug.Log("Penetrate");
-                break;
-                case PawnType.Stick:
-                    Debug.Log("Stick!");
-                    // Sauvegarder vitesse actuelle  
-                    Vector3 velocity = rb.velocity;
-                    rb.velocity = Vector3.zero;
-                    rb.velocity = -col.contacts[0].normal * velocity.magnitude * 0.1f;
-                break;
-                default:
-                break;
-            }
-        }
-       
     }
 }
