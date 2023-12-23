@@ -26,7 +26,7 @@ abstract public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ abstract public class Character : MonoBehaviour
         lastVelocity = rb.velocity;
     }
 
-    public void takeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
         currentHp = currentHp - (dmg - defense);
     }
@@ -48,6 +48,7 @@ abstract public class Character : MonoBehaviour
             var direction = Vector3.Reflect(lastVelocity.normalized, col.contacts[0].normal);
 
             rb.velocity = direction * Mathf.Max(speed, 0f);
+            Debug.Log("Collision Parent : Wall");
         }
        
     }

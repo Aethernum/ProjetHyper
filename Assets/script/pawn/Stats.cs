@@ -24,7 +24,7 @@ public class Stats : MonoBehaviour
         
     }
 
-    public void takeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
         currentHp = currentHp - (dmg - defense);
     }
@@ -37,7 +37,7 @@ public class Stats : MonoBehaviour
                 enemiesInContact.Add(col.gameObject);
                 Debug.Log("Contact avec : " + col.gameObject.name);
                 Stats opponentScript = col.gameObject.GetComponentInParent<Stats>();
-                opponentScript.takeDamage(attack);
+                opponentScript.TakeDamage(attack);
             }
         }
     }

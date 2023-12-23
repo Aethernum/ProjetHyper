@@ -7,7 +7,7 @@ public class Sticky : Character
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -22,6 +22,7 @@ public class Sticky : Character
         if(col.gameObject.tag == "Ennemy")
         {
             rb.velocity = Vector3.zero;
+            Debug.Log("Collision Enfant : Ennemy");
         }
        
     }

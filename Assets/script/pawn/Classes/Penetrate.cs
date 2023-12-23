@@ -8,6 +8,7 @@ public class Penetrate : Character
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         rb.excludeLayers = LayerMask.GetMask("Ally" ,"Ennemy"); 
     }
 
@@ -19,7 +20,7 @@ public class Penetrate : Character
 
     protected override void OnCollisionEnter(Collision col)
     {
-        base.OnCollisionEnter(col);       
+        base.OnCollisionEnter(col);    
     }
 
     private void OnTriggerEnter(Collider col) {
@@ -30,7 +31,8 @@ public class Penetrate : Character
                 enemiesInContact.Add(col.gameObject);
                 Debug.Log("Contact avec : " + col.gameObject.name);
                 Stats opponentScript = col.gameObject.GetComponentInParent<Stats>();
-                opponentScript.takeDamage(attack);
+                opponentScript.TakeDamage(attack);
+                Debug.Log("Collision Enfant : Ennemy");
             }
         }
     }
