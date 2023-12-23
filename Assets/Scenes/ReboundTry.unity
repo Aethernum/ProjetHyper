@@ -871,12 +871,13 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a05b7cf245dd74749b363e976f9881cb, type: 2}
     m_RemovedComponents:
     - {fileID: 4069605693452611229, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
+    - {fileID: 3313160605503901930, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2761924136635570348, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2070309660}
+      addedObject: {fileID: 2070309665}
   m_SourcePrefab: {fileID: 100100000, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
 --- !u!4 &1230252636 stripped
 Transform:
@@ -1099,12 +1100,13 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 974e8f81aa13fd649abcd5dcf579e8fb, type: 2}
     m_RemovedComponents:
     - {fileID: 4069605693452611229, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
+    - {fileID: 3313160605503901930, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2761924136635570348, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1796445409}
+      addedObject: {fileID: 1796445414}
   m_SourcePrefab: {fileID: 100100000, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
 --- !u!4 &1570939881 stripped
 Transform:
@@ -1127,6 +1129,10 @@ PrefabInstance:
     - target: {fileID: 2761924136635570348, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
       propertyPath: m_Name
       value: Ally
+      objectReference: {fileID: 0}
+    - target: {fileID: 3313160605503901930, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8511556938786356109, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1170,19 +1176,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4069605693452611229, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
+    - {fileID: 3313160605503901930, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2761924136635570348, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1778656743}
+      addedObject: {fileID: 1778656744}
   m_SourcePrefab: {fileID: 100100000, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
 --- !u!4 &1778656737 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8511556938786356109, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
   m_PrefabInstance: {fileID: 1778656736}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1778656743
+--- !u!114 &1778656744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1191,20 +1198,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1593934379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5313b5a83bce2a3478d9afeccd044f00, type: 3}
+  m_Script: {fileID: 11500000, guid: fecf8c20fa16d5048b842067d6ee4710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroesName: 
   maxHp: 50
   currentHp: 50
-  heroesSpeed: 5
+  speed: 5
   attack: 10
   defense: 5
+  type: 0
 --- !u!1 &1796445403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2761924136635570348, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
   m_PrefabInstance: {fileID: 1570939880}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1796445409
+--- !u!114 &1796445414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1213,14 +1222,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1796445403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5313b5a83bce2a3478d9afeccd044f00, type: 3}
+  m_Script: {fileID: 11500000, guid: 21b2eb86a4c27174586182a88a0e42e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroesName: 
   maxHp: 50
   currentHp: 50
-  heroesSpeed: 5
+  speed: 5
   attack: 10
   defense: 5
+  type: 2
 --- !u!1 &1976525137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1331,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2761924136635570348, guid: e71dcaad82621954eb104591eaa4ec13, type: 3}
   m_PrefabInstance: {fileID: 1230252635}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2070309660
+--- !u!114 &2070309665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1329,14 +1340,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070309654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5313b5a83bce2a3478d9afeccd044f00, type: 3}
+  m_Script: {fileID: 11500000, guid: c28d130bd8e31e74ab652fe9caa0ed98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroesName: 
   maxHp: 50
   currentHp: 50
-  heroesSpeed: 5
+  speed: 5
   attack: 10
   defense: 5
+  type: 1
 --- !u!1 &2124002492
 GameObject:
   m_ObjectHideFlags: 0
