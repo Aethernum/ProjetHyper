@@ -23,10 +23,8 @@ public class Rebound : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        Debug.Log("Collision!");
         foreach (ContactPoint contact in col.contacts)
         {
-            Debug.Log("Autre collider : " + contact.otherCollider);
             // Vous pouvez ajouter d'autres informations que vous voulez afficher ici
         }
 
@@ -47,10 +45,8 @@ public class Rebound : MonoBehaviour
                     rb.velocity = direction * Mathf.Max(speed, 0f);
                 break;
                 case PawnType.Penetrate:
-                    Debug.Log("Penetrate");
                 break;
                 case PawnType.Stick:
-                    Debug.Log("Stick!");
                      rb.velocity = Vector3.zero;
                 break;
                 default:

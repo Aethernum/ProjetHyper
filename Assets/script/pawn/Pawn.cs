@@ -104,7 +104,6 @@ public class Pawn : MonoBehaviour
     {
         isSelected = true;
         
-        Debug.Log("slected");
         clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
 
