@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public enum PawnType
+/* public enum PawnType
 {
     Bounce,
     Penetrate,
     Stick
     // Ajoutez d'autres types selon vos besoins
-}
+} */
 
 public class Pawn : MonoBehaviour
 {
@@ -15,7 +15,6 @@ public class Pawn : MonoBehaviour
     private bool isSelected;
     private Vector3 clickPosition;
     private Rigidbody rb;
-    [SerializeField] private string heroesName;
     [SerializeField] private float heroesSpeed;
     [SerializeField] private float maxForce = 10f; 
     [SerializeField] private PawnType heroesPawnType;
