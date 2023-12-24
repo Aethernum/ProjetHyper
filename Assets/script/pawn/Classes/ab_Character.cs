@@ -36,7 +36,7 @@ public abstract class Character : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         lastVelocity = rb.velocity;
     }

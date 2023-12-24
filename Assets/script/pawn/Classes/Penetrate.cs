@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Penetrate : Character
@@ -12,8 +14,9 @@ public class Penetrate : Character
     }
 
     // Update is called once per frame
-    private void Update()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
     }
 
     protected override void OnCollisionEnter(Collision col)
