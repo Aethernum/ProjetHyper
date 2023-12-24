@@ -11,12 +11,22 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int defense = 5;
     protected Rigidbody rb;
     protected Vector3 lastVelocity;
-    protected bool IsActivated;
+    protected bool isActivated = false;
 
     // Accesseur
     public float GetSpeed()
     {
         return this.speed;
+    }
+    public bool GetActivated()
+    {
+        return this.isActivated;
+    }
+
+    // Setter
+    public void SetActivated(bool b)
+    {
+        isActivated = b;
     }
 
     // Start is called before the first frame update
@@ -33,7 +43,10 @@ public abstract class Character : MonoBehaviour
 
     public void TakeDamage(int dmg)
     {
-        currentHp = currentHp - (dmg - defense);
+        if(!isActivated)
+        {
+            currentHp = currentHp - (dmg - defense);
+        }
     }
 
     protected virtual void OnCollisionEnter(Collision col)

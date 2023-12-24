@@ -21,11 +21,13 @@ public class Bounce : Character
         base.OnCollisionEnter(col);
         if(col.gameObject.tag == "Ennemy")
         {
+            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+            opponentCharacter.TakeDamage(attack);
+            
             var speed = lastVelocity.magnitude;
             var direction = Vector3.Reflect(lastVelocity.normalized, col.contacts[0].normal);
             rb.velocity = direction * Mathf.Max(speed, 0f);
-            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
-            opponentCharacter.TakeDamage(attack);
+            
         }
        
     }

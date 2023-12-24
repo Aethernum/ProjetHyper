@@ -18,6 +18,10 @@ public class Sticky : Character
         base.OnCollisionEnter(col);
         if (col.gameObject.tag == "Ennemy")
         {
+            Debug.Log("Contact ennemy");
+            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+            opponentCharacter.TakeDamage(attack);
+
             Vector3 velocity = rb.velocity;
             rb.velocity = Vector3.zero;
 
@@ -32,8 +36,6 @@ public class Sticky : Character
                 // Place l'objet A à la limite du collider de l'objet B
                 transform.position = pointDeContact;
             }
-            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
-            opponentCharacter.TakeDamage(attack);
         }
     }
 }

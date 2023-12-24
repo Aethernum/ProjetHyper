@@ -42,7 +42,7 @@ public class Movement : MonoBehaviour
     {
         while (true)
         {
-            if (isSelected || rb.velocity.magnitude > 0.1f)
+            if (character.GetActivated() || rb.velocity.magnitude > 0.1f)
             {
                 rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             }
@@ -56,7 +56,7 @@ public class Movement : MonoBehaviour
 
     private void OnSpeedLimitReached(float speed)
     {
-        isSelected = false;
+        character.SetActivated(false);
     }
 
     private void TryStartDrag()
@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
         {
-            // Le clic de la souris a commencé sur le pawn
+            // Le clic de la souris a commencï¿½ sur le pawn
             OnMouseDown();
         }
     }
@@ -97,7 +97,7 @@ public class Movement : MonoBehaviour
         }
         Vector3 forceToApply = -dragDirection.normalized * character.GetSpeed() * forceMultiplier;
 
-        // Appliquer une force proportionnelle à la distance pour simuler la projection
+        // Appliquer une force proportionnelle ï¿½ la distance pour simuler la projection
         rb.AddForce(forceToApply, ForceMode.Impulse);
 
         isMouseDragging = false;
@@ -109,7 +109,7 @@ public class Movement : MonoBehaviour
         {
             return;
         }
-        isSelected = true;
+        character.SetActivated(true);
 
         clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;
