@@ -15,9 +15,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Team1
-  - Team2
-  - IgnoreCollide
+  - ActiveTeam
+  - InactiveTeam
+  - 
   - 
   - 
   - 

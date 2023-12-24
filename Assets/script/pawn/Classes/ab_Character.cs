@@ -11,12 +11,42 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int defense = 5;
     protected Rigidbody rb;
     protected Vector3 lastVelocity;
-    protected bool IsActivated;
+    protected bool isActivated;
 
-    // Accesseur
+    protected GameManager gameManager;    // Accesseur
+    protected BattleSystem battleSystem;
+
     public float GetSpeed()
     {
         return this.speed;
+    }
+
+    public bool IsActivated
+    {
+        get
+        {
+            return isActivated;
+        }
+
+        set
+        {
+            isActivated = value;
+        }
+    }
+
+    private void Awake()
+    {
+        gameManager = GameManager.Instance;
+
+        if (gameManager != null)
+        {
+            BattleSystem.OnBattleStateChange += BattleSystemOnBattleStateChange;
+        }
+    }
+
+    private void BattleSystemOnBattleStateChange(BattleState obj)
+    {
+        Debug.Log("Change State");
     }
 
     // Start is called before the first frame update
