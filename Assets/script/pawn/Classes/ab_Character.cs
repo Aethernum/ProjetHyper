@@ -11,6 +11,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected int defense = 5;
     protected Rigidbody rb;
     protected Vector3 lastVelocity;
+    protected bool IsActivated;
 
     // Accesseur
     public float GetSpeed()

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1080642758792326767}
   - component: {fileID: 6272479097897109077}
-  - component: {fileID: 3347794278902804573}
   - component: {fileID: 3304449991583222305}
+  - component: {fileID: 3347794278902804573}
   - component: {fileID: 8973190325226130866}
   m_Layer: 0
   m_Name: Penetrate
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2408310254337777267}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25536096, y: 20.913069, z: -5.7650223}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56,7 +56,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -64,19 +64,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3347794278902804573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2408310254337777267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9824b75e1d4750e40aa31945a09df48a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedThreshold: 0.1
 --- !u!114 &3304449991583222305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,9 +79,22 @@ MonoBehaviour:
   heroesName: 
   maxHp: 50
   currentHp: 50
-  speed: 5
+  speed: 50
   attack: 10
   defense: 5
+--- !u!114 &3347794278902804573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408310254337777267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9824b75e1d4750e40aa31945a09df48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedThreshold: 0.1
 --- !u!114 &8973190325226130866
 MonoBehaviour:
   m_ObjectHideFlags: 0
