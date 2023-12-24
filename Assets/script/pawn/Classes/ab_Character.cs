@@ -46,7 +46,6 @@ public abstract class Character : MonoBehaviour
 
     private void BattleSystemOnBattleStateChange(BattleState obj)
     {
-        Debug.Log("Change State");
     }
 
     // Start is called before the first frame update
@@ -59,6 +58,20 @@ public abstract class Character : MonoBehaviour
     private void FixedUpdate()
     {
         lastVelocity = rb.velocity;
+    }
+
+    public virtual void ActiveLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("ActiveTeam");
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("ActiveTeam");
+        gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("ActiveTeam");
+    }
+
+    public virtual void DeactiveLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("InactiveTeam");
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("InactiveTeam");
+        gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Nothing");
     }
 
     public void TakeDamage(int dmg)

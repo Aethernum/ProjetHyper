@@ -14,6 +14,13 @@ public class UiManager : MonoBehaviour
     {
         root = baseUi.rootVisualElement;
         endturn1 = root.Q<Button>("EndTurnPlayer");
+        endturn1.clicked += () =>
+        {
+            if (GameManager.Instance.battleSystem.state == BattleState.PlayerTurn)
+            {
+                GameManager.Instance.battleSystem.UpdateGameState(BattleState.EnnemyTurn);
+            }
+        };
     }
 
     // Update is called once per frame

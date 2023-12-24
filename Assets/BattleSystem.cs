@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public enum BattleState
@@ -7,6 +8,7 @@ public enum BattleState
     InitializeGame,
     PlayerTurn,
     EnnemyTurn,
+    EndingTurn,
     Won,
     Lose
 }
@@ -16,19 +18,25 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private List<Spawner> team1SpawnPoints;
     [SerializeField] private List<Spawner> team2SpawnPoints;
 
-    [SerializeField] private List<Character> team1Units;
-    [SerializeField] private List<Character> team2Units;
+    [SerializeField] private List<Character> team1UnitsInfo;
+    [SerializeField] private List<Character> team2UnitsInfo;
 
+    private List<Character> team1Units;
+    private List<Character> team2Units;
+    private BattleState lastState = BattleState.InitializeGame;
     public BattleState state;
     public static event Action<BattleState> OnBattleStateChange;
 
     private void Start()
     {
+        team1Units = new List<Character>();
+        team2Units = new List<Character>();
         UpdateGameState(BattleState.InitializeGame);
     }
 
     public void UpdateGameState(BattleState newState)
     {
+        lastState = state;
         state = newState;
 
         switch (state)
@@ -38,9 +46,15 @@ public class BattleSystem : MonoBehaviour
                 break;
 
             case BattleState.PlayerTurn:
+                HandlePlayerTurn();
                 break;
 
             case BattleState.EnnemyTurn:
+                HandleEnnemyTurn();
+                break;
+
+            case BattleState.EndingTurn:
+                HandleEndingTurn();
                 break;
 
             case BattleState.Won:
@@ -53,11 +67,50 @@ public class BattleSystem : MonoBehaviour
         OnBattleStateChange?.Invoke(newState);
     }
 
+    private void HandleEndingTurn()
+    {
+        foreach (var pawn in team1Units)
+        {
+            pawn.DeactiveLayer();
+        }
+        foreach (var pawn in team2Units)
+        {
+            pawn.DeactiveLayer();
+        }
+        if (lastState == BattleState.EnnemyTurn || lastState == BattleState.InitializeGame)
+        {
+            UpdateGameState(BattleState.PlayerTurn);
+        }
+        else
+        {
+            UpdateGameState(BattleState.EnnemyTurn);
+        }
+    }
+
+    private async void HandleEnnemyTurn()
+    {
+        foreach (var pawn in team2Units)
+        {
+            pawn.ActiveLayer();
+        }
+        await Task.Delay(2000);
+        UpdateGameState(BattleState.EndingTurn);
+    }
+
+    private void HandlePlayerTurn()
+    {
+        foreach (var pawn in team1Units)
+        {
+            Debug.Log(pawn.gameObject.name);
+            pawn.ActiveLayer();
+        }
+    }
+
     private void InitializeGame()
     {
-        SpawnTeam(team1SpawnPoints, team1Units);
-        SpawnTeam(team2SpawnPoints, team2Units);
-        UpdateGameState(BattleState.PlayerTurn);
+        SpawnTeam(team1SpawnPoints, team1UnitsInfo, team1Units);
+        SpawnTeam(team2SpawnPoints, team2UnitsInfo, team2Units);
+        UpdateGameState(BattleState.EndingTurn);
     }
 
     /*
@@ -81,10 +134,10 @@ public class BattleSystem : MonoBehaviour
     }
     */
 
-    private void SpawnTeam(List<Spawner> spawners, List<Character> characterList)
+    private void SpawnTeam(List<Spawner> spawners, List<Character> characterListInfo, List<Character> TeamGameList)
     {
-        int maxCount = Mathf.Min(spawners.Count, characterList.Count);
-        if (maxCount == 0 || characterList.Count > spawners.Count)
+        int maxCount = Mathf.Min(spawners.Count, characterListInfo.Count);
+        if (maxCount == 0 || characterListInfo.Count > spawners.Count)
         {
             Debug.Log("error in list");
             return;
@@ -92,7 +145,9 @@ public class BattleSystem : MonoBehaviour
         for (int i = 0; i < maxCount; i++)
         {
             // Faire spawn sur chaque spawner
-            spawners[i].Spawn(characterList[i]);
+            Character newPawn = Instantiate(characterListInfo[i], spawners[i].transform.position, spawners[i].transform.rotation, spawners[i].transform);
+
+            TeamGameList.Add(newPawn);
         }
     }
 
