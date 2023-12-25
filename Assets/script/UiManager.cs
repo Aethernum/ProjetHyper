@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
         {
             if (GameManager.Instance.battleSystem.state == BattleState.PlayerTurn)
             {
-                GameManager.Instance.battleSystem.UpdateGameState(BattleState.EnnemyTurn);
+                GameManager.Instance.battleSystem.UpdateGameState(BattleState.EndingTurn);
             }
         };
     }
