@@ -24,6 +24,13 @@ public class Penetrate : Character
         base.OnCollisionEnter(col);
     }
 
+    public override void ActiveLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("ActiveTeam");
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("ActiveTeam");
+        gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("ActiveTeam", "InactiveTeam");
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Ennemy")

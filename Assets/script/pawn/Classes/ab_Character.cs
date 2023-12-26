@@ -13,7 +13,9 @@ public abstract class Character : MonoBehaviour
     protected Vector3 lastVelocity;
     protected bool isActivated = false;
 
-    // Accesseur
+    protected GameManager gameManager;    // Accesseur
+    protected BattleSystem battleSystem;
+
     public float GetSpeed()
     {
         return this.speed;
@@ -29,6 +31,33 @@ public abstract class Character : MonoBehaviour
         isActivated = b;
     }
 
+    public bool IsActivated
+    {
+        get
+        {
+            return isActivated;
+        }
+
+        set
+        {
+            isActivated = value;
+        }
+    }
+
+    private void Awake()
+    {
+        gameManager = GameManager.Instance;
+
+        if (gameManager != null)
+        {
+            BattleSystem.OnBattleStateChange += BattleSystemOnBattleStateChange;
+        }
+    }
+
+    private void BattleSystemOnBattleStateChange(BattleState obj)
+    {
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -39,6 +68,20 @@ public abstract class Character : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         lastVelocity = rb.velocity;
+    }
+
+    public virtual void ActiveLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("ActiveTeam");
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("ActiveTeam");
+        gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("ActiveTeam");
+    }
+
+    public virtual void DeactiveLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("InactiveTeam");
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("InactiveTeam");
+        gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("Nothing");
     }
 
     public void TakeDamage(int dmg)

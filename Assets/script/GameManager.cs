@@ -1,31 +1,39 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Spawner> spawnersTeam1;
-    public List<Spawner> spawnersTeam2;
-    public List<Character> characterListTeam1;
-    public List<Character> characterListTeam2;
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        // Assurez-vous qu'il n'y a qu'une seule instance de GameManager
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            // S'il y a déjà une instance, détruisez celle-ci
+            Destroy(gameObject);
+        }
+    }
+
+    public UiManager uiManager;
+    public BattleSystem battleSystem;
 
     private void Start()
     {
-        SpawnTeam(spawnersTeam1, characterListTeam1, "Team1");
-        SpawnTeam(spawnersTeam2, characterListTeam2, "Team2");
+        BattleSystem.OnBattleStateChange += HandleBattleStateChange;
     }
 
-    private void SpawnTeam(List<Spawner> spawners, List<Character> characterList, string teamName)
+    // Méthode qui sera appelée lorsque l'état de la bataille change
+    public void HandleBattleStateChange(BattleState newState)
     {
-        int maxCount = Mathf.Min(spawners.Count, characterList.Count);
-        if (maxCount == 0 || characterList.Count > spawners.Count)
-        {
-            Debug.Log("error in list");
-            return;
-        }
-        for (int i = 0; i < maxCount; i++)
-        {
-            // Faire spawn sur chaque spawner
-            spawners[i].Spawn(characterList[i], teamName);
-        }
+    }
+
+    private void OnDestroy()
+    {
+        // Assurez-vous de vous désabonner lorsque le GameManager est détruit
+        BattleSystem.OnBattleStateChange -= HandleBattleStateChange;
     }
 }

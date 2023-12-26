@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private bool isMouseDragging = false;
     private bool isSelected;
     private Vector3 clickPosition;
     private Rigidbody rb;
@@ -24,17 +23,9 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (rb.velocity.magnitude > 0)
         {
-            TryStartDrag();
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (isMouseDragging)
-            {
-                OnMouseUp();
-            }
+            Debug.Log(rb.velocity);
         }
     }
 
@@ -57,17 +48,6 @@ public class Movement : MonoBehaviour
     private void OnSpeedLimitReached(float speed)
     {
         character.SetActivated(false);
-    }
-
-    private void TryStartDrag()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == gameObject)
-        {
-            // Le clic de la souris a commenc� sur le pawn
-            OnMouseDown();
-        }
     }
 
     private void OnMouseUp()
@@ -99,13 +79,11 @@ public class Movement : MonoBehaviour
 
         // Appliquer une force proportionnelle � la distance pour simuler la projection
         rb.AddForce(forceToApply, ForceMode.Impulse);
-
-        isMouseDragging = false;
     }
 
     private void OnMouseDown()
     {
-        if (gameObject.tag == "Team2")
+        if (gameObject.layer == LayerMask.NameToLayer("InactiveTeam"))
         {
             return;
         }
