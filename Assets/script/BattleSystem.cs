@@ -108,8 +108,8 @@ public class BattleSystem : MonoBehaviour
 
     private void InitializeGame()
     {
-        SpawnTeam(team1SpawnPoints, team1UnitsInfo, team1Units);
-        SpawnTeam(team2SpawnPoints, team2UnitsInfo, team2Units);
+        SpawnTeam(team1SpawnPoints, team1UnitsInfo, team1Units, "Team1");
+        SpawnTeam(team2SpawnPoints, team2UnitsInfo, team2Units, "Team2");
         UpdateGameState(BattleState.EndingTurn);
     }
 
@@ -118,7 +118,7 @@ public class BattleSystem : MonoBehaviour
     {
         SpawnTeam(team1SpawnPoints, team1Units);
         SpawnTeam(team1SpawnPoints, team1Units);
-        // Commencer le tour de l'équipe 1
+        // Commencer le tour de l'ï¿½quipe 1
         activeTeam = 0;
         SetUnitActiveState(team1Units, true);
         SetUnitActiveState(team2Units, false);
@@ -134,7 +134,7 @@ public class BattleSystem : MonoBehaviour
     }
     */
 
-    private void SpawnTeam(List<Spawner> spawners, List<Character> characterListInfo, List<Character> TeamGameList)
+    private void SpawnTeam(List<Spawner> spawners, List<Character> characterListInfo, List<Character> TeamGameList, string teamName)
     {
         int maxCount = Mathf.Min(spawners.Count, characterListInfo.Count);
         if (maxCount == 0 || characterListInfo.Count > spawners.Count)
@@ -146,6 +146,7 @@ public class BattleSystem : MonoBehaviour
         {
             // Faire spawn sur chaque spawner
             Character newPawn = Instantiate(characterListInfo[i], spawners[i].transform.position, spawners[i].transform.rotation, spawners[i].transform);
+            newPawn.Team = teamName;
 
             TeamGameList.Add(newPawn);
         }

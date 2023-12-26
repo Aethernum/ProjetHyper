@@ -16,25 +16,27 @@ public class Sticky : Character
     protected override void OnCollisionEnter(Collision col)
     {
         base.OnCollisionEnter(col);
-        if (col.gameObject.tag == "Ennemy")
+        Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+        if(opponentCharacter)
         {
-            Debug.Log("Contact ennemy");
-            Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
-            opponentCharacter.TakeDamage(attack);
-
-            Vector3 velocity = rb.velocity;
-            rb.velocity = Vector3.zero;
-
-            Collider opponentCollider = col.collider;
-            Collider thisCollider = GetComponent<Collider>();
-            if (opponentCollider != null && thisCollider != null)
+            if(opponentCharacter.Team != Team)
             {
-                // Trouve le point de contact entre les deux colliders
-                ContactPoint contact = col.contacts[0]; // Obtient le premier point de contact de la collision
-                Vector3 pointDeContact = contact.point;
+                opponentCharacter.TakeDamage(attack);
 
-                // Place l'objet A à la limite du collider de l'objet B
-                transform.position = pointDeContact;
+                Vector3 velocity = rb.velocity;
+                rb.velocity = Vector3.zero;
+
+                Collider opponentCollider = col.collider;
+                Collider thisCollider = GetComponent<Collider>();
+                if (opponentCollider != null && thisCollider != null)
+                {
+                    // Trouve le point de contact entre les deux colliders
+                    ContactPoint contact = col.contacts[0]; // Obtient le premier point de contact de la collision
+                    Vector3 pointDeContact = contact.point;
+
+                    // Place l'objet A à la limite du collider de l'objet B
+                    transform.position = pointDeContact;
+                }
             }
         }
     }

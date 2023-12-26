@@ -12,6 +12,7 @@ public abstract class Character : MonoBehaviour
     protected Rigidbody rb;
     protected Vector3 lastVelocity;
     protected bool isActivated = false;
+    [SerializeField] protected string team;
 
     protected GameManager gameManager;    // Accesseur
     protected BattleSystem battleSystem;
@@ -19,16 +20,6 @@ public abstract class Character : MonoBehaviour
     public float GetSpeed()
     {
         return this.speed;
-    }
-    public bool GetActivated()
-    {
-        return this.isActivated;
-    }
-
-    // Setter
-    public void SetActivated(bool b)
-    {
-        isActivated = b;
     }
 
     public bool IsActivated
@@ -43,7 +34,18 @@ public abstract class Character : MonoBehaviour
             isActivated = value;
         }
     }
+    public string Team
+    {
+        get
+        {
+            return team;
+        }
 
+        set
+        {
+            team = value;
+        }
+    }
     private void Awake()
     {
         gameManager = GameManager.Instance;

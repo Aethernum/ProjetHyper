@@ -33,7 +33,7 @@ public class Movement : MonoBehaviour
     {
         while (true)
         {
-            if (character.GetActivated() || rb.velocity.magnitude > 0.1f)
+            if (character.IsActivated || rb.velocity.magnitude > 0.1f)
             {
                 rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             }
@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
 
     private void OnSpeedLimitReached(float speed)
     {
-        character.SetActivated(false);
+        character.IsActivated = false;
     }
 
     private void OnMouseUp()
@@ -87,7 +87,7 @@ public class Movement : MonoBehaviour
         {
             return;
         }
-        character.SetActivated(true);
+        character.IsActivated = true;
 
         clickPosition = Input.mousePosition;
         clickPosition.z = Camera.main.WorldToScreenPoint(transform.position).z;

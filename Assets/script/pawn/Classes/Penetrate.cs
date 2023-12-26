@@ -33,13 +33,16 @@ public class Penetrate : Character
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Ennemy")
+        Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
+        if(opponentCharacter)
         {
-            if (!enemiesInContact.Contains(col.gameObject))
+            if(opponentCharacter.Team != Team)
             {
-                enemiesInContact.Add(col.gameObject);
-                Character opponentCharacter = col.gameObject.GetComponentInParent<Character>();
-                opponentCharacter.TakeDamage(attack);
+                if (!enemiesInContact.Contains(col.gameObject))
+                {
+                    enemiesInContact.Add(col.gameObject);
+                    opponentCharacter.TakeDamage(attack);
+                }
             }
         }
     }
